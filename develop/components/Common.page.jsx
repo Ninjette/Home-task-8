@@ -1,86 +1,31 @@
 import React, { Component, PropTypes } from 'react';
-
-const limit = 12;
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actions from "../actions/common.actions";
 
 class CommonPage extends Component {
 	constructor(){
 		super()
 		this.state = {
 			pokemonsArray: [],
-			offset: 0
+			offset: 0,
+			limit : 12
 		}
 	}
 
-	loadMore(){
-		this.loadItems(this.state.offset);
-	}
-
-	loadItems(offset){
-		let self = this;
-		self.addLoader();
-		let pokemons = self.state.pokemonsArray;
-		fetch('http://pokeapi.co/api/v2/pokemon/?limit='+limit+'&offset='+offset)
-			.then(function(response) {
-				return response.json();
-			})
-			.then(function(responseInfo) {
-				responseInfo.results.map(function(el, index){
-					pokemons.push(el);
-				})
-
-				//get types
-				let counter = 0;
-				for (let j = offset; j < offset+12; j++) {
-					fetch('http://pokeapi.co/api/v2/pokemon/'+(j+1))
-						.then(function(responseInfo) {
-							return responseInfo.json();
-						})
-						.then(function(resultInfo) {
-							pokemons[j].id = resultInfo.id;
-							pokemons[j].types = resultInfo.types;
-							counter++;
-							// console.log(counter, 'counter');
-							if(counter === 12){
-								self.setState({
-									pokemonsArray: pokemons,
-									offset: self.state.offset + 12
-								});
-								self.removeLoader();
-							}
-						})
-						.catch( alert );
-				};
-			})
-			.catch( alert );
-	}
-
-	addLoader(){
-		let loader = document.querySelectorAll('.loader');
-		let btnLoadMore = document.querySelectorAll('.js-load');
-
-		loader.forEach(function(item, i) {
-			loader[i].classList.add("active");
-		});
-
-		btnLoadMore.forEach(function(item, i) {
-			btnLoadMore[i].style.display = 'none';
-		});
-	}
-
-	removeLoader(){
-		let loader = document.querySelectorAll('.loader');
-		let btnLoadMore = document.querySelectorAll('.js-load');
-
-		loader.forEach(function(item, i) {
-			loader[i].classList.remove("active");
-		});
-		btnLoadMore.forEach(function(item, i) {
-			btnLoadMore[i].style.display = 'block';
-		});
-	}
-
 	componentDidMount(){
-		this.loadItems(this.state.offset);
+		this.props.loadItems(this.state.limit, this.state.offset, this.state.pokemonsArray);
+	}
+
+	componentWillReceiveProps(nextProps){
+		this.setState({
+			pokemonsArray: nextProps.state.common.pokemonsArray,
+			offset: nextProps.state.common.offset
+		})
+	}
+
+	loadMore(){
+		this.props.loadItems(this.state.limit, this.state.offset, this.state.pokemonsArray);
 	}
 
     render() {
@@ -119,14 +64,24 @@ class CommonPage extends Component {
                 	<img  className="loader__media" src="static/build/img/loader.gif"/>
                 	<p className="loader__text">loading...</p>
                 </div>
-                <button onClick={this.loadMore.bind(this)} className="js-load button btn btn-success">Load more</button>
+                <button onClick={this.loadMore.bind(this)}className="js-load button btn btn-success">Load more</button>
             </div>
         );
     }
 }
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators(actions, dispatch);
+}
 
+function mapStateToProps(state) {
+	return {
+		state: state
+	};
+}
 CommonPage.propTypes = {
     handleCommonAction: PropTypes.func,
 };
 
-export default CommonPage;
+const Common = connect(mapStateToProps, mapDispatchToProps)(CommonPage);
+
+export default Common;

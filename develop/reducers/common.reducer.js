@@ -7,6 +7,21 @@ export default (state = {}, action) => {
                 ...state,
             };
 
+        case 'SET_ITEMS':{
+            const {pokemonsArray} = action;
+            return Object.assign({}, state, {
+                pokemonsArray
+            });
+        }
+
+        case 'SET_OFFSET':{
+            const {offset} = action;
+            return Object.assign({}, state, {
+                offset
+            });
+        }
+
+
         default:
             return state;
     }
