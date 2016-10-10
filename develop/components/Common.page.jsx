@@ -34,7 +34,7 @@ class CommonPage extends Component {
         return (
             <div className="container" onClick={handleCommonAction} >
                 <div className="search-wrap">
-                    <form action="" className="search">
+                    <form action="" className="form-search search">
                     	<input type="text" className="search__input" />
                     	<button type="submit" className="search__submit" value="submit"> submit </button>
                     </form>
