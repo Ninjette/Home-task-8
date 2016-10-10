@@ -1,0 +1,10 @@
+.idea/
+node_modules/
+public/
+npm-debug.log
+npm-debug.log.*
+.eslintcache
+
+develop/config/appConfig.js
+
+.DS_Store

@@ -1,0 +1,113 @@
+.elem{
+	background-color: #F2F2F2;
+	border-radius: 3px;
+	color: #313131;
+	margin-bottom: 20px;
+	padding: 10px;
+	&__media-wrap{
+		height: 200px;
+		text-align: center;
+		background-color: #fff;
+		margin-bottom: 10px;
+	}
+	&__media{
+		padding: 5px;
+		max-width: 100%;
+		max-height: 100%;
+	}
+	&__name{
+		font-size: 18px;
+	}
+	&__types div{
+		display: inline-block;
+		padding: 5px;
+		border-radius: 3px;
+		margin-right: 5px;
+	}
+}
+.search-wrap{
+	background-color: #404040;
+	border-radius: 6px;
+	border-bottom: 1px solid #000;
+	margin-bottom: 10px;
+}
+.search{
+	text-align: center;
+	padding: 8px 0;
+	font-size: 0;
+	&__input{
+		background-color: #EEEEEE;
+		border: none;
+		width: 330px;
+		height: 36px;
+		vertical-align: top;
+		font-size: 17px;
+		color: #404040;
+		padding: 5px 10px;
+		border-radius: 3px 0 0 3px;
+		&:focus{
+			outline: none;
+			box-shadow: 0 0 9px 0px rgba(215,61,59,0.9);
+		}
+	}
+	&__submit{
+		font-size: 14px;
+		background-color: #D73D3B;
+		color: #FFE9E2;
+		border: none;
+		height: 36px;
+		display: inline-block;
+		border-radius: 0 3px 3px 0;
+		position: relative;
+		transition: background-color .15s ease-out;
+		&:hover{
+			background-color: lighten(#D73D3B, 15);
+			&:before{
+				border-right: 6px solid lighten(#D73D3B, 15);
+			}
+		}
+		&:active{
+			background-color: darken(#D73D3B, 15);
+			transition: border-color 0s;
+			&:before{
+				border-right: 6px solid darken(#D73D3B, 15);
+				transition: border-color 0s;
+			}
+		}
+		&:focus{
+			outline: none;
+		}
+		&:before{
+			content:"";
+			position: absolute;
+			left: -12px;
+			top: 50%;
+			margin-top: -6px;
+			border: 6px solid transparent;
+			border-right: 6px solid #D73D3B;
+			transition: border-color .15s ease-out;
+		}
+	}
+}
+.loader{
+	opacity: 0;
+	margin: auto;
+	max-width: 250px;
+	transition: all .25s ease-out;
+	height: 0;
+	overflow: hidden;
+
+	&__media{
+		max-width: 100%;
+		max-height: 100%;
+	}
+	&__text{
+		text-align: center;
+		font-size: 18px;
+	}
+	&.active{
+		opacity: 1;
+		height: auto;
+		transition: all .25s ease-out;
+	}
+}
