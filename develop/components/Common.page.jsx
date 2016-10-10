@@ -19,7 +19,7 @@ class CommonPage extends Component {
 		let self = this;
 		self.addLoader();
 		let pokemons = self.state.pokemonsArray;
-		fetch('https://pokeapi.co/api/v2/pokemon/?limit='+limit+'&offset='+offset)
+		fetch('http://pokeapi.co/api/v2/pokemon/?limit='+limit+'&offset='+offset)
 			.then(function(response) {
 				return response.json();
 			})
@@ -31,7 +31,7 @@ class CommonPage extends Component {
 				//get types
 				let counter = 0;
 				for (let j = offset; j < offset+12; j++) {
-					fetch('https://pokeapi.co/api/v2/pokemon/'+(j+1))
+					fetch('http://pokeapi.co/api/v2/pokemon/'+(j+1))
 						.then(function(responseInfo) {
 							return responseInfo.json();
 						})
