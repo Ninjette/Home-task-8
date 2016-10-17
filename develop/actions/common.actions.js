@@ -5,9 +5,9 @@ export const commonAction = (params) => ({
     params,
 });
 
+
 export  function loadItems(limit, offset, pokemons) {
     return dispatch => {
-
         addLoader();
         fetch('https://pokeapi.co/api/v2/pokemon/?limit=' + limit + '&offset=' + offset)
             .then(function (response) {
@@ -53,7 +53,28 @@ export const setItems = (items) => ({
 export const setOffset = (offsetNumber) =>({
     type: 'SET_OFFSET',
     offset: offsetNumber
-})
+});
+
+export const setDesired = (desired) =>({
+    type: 'SET_DESIRED',
+    desiredArray: desired
+});
+
+export function loadDesired(desiredArray, mask){
+	return dispatch => {
+		//get desired pokemons from Local Storage
+		let lsLength = localStorage.length;
+		if (lsLength > 0) {
+			for(let i = 0; i < lsLength; i++) {
+				let key = localStorage.key(i);
+				if(key.indexOf(mask) == 0) {
+					desiredArray.push(JSON.parse(localStorage.getItem(key)));
+				}
+			}
+		};
+		dispatch(setDesired(desiredArray))
+	}
+}
 
 
 export function addLoader() {

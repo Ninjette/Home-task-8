@@ -21,6 +21,13 @@ export default (state = {}, action) => {
             });
         }
 
+        case 'SET_DESIRED':{
+            const {desiredArray} = action;
+            return Object.assign({}, state, {
+                desiredArray
+            });
+        }
+
 
         default:
             return state;
