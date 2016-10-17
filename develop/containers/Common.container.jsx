@@ -18,17 +18,4 @@ class Common extends Component {
     }
 }
 
-Common.propTypes = {
-    handleCommonAction: PropTypes.func,
-};
-
-const mapStateTotProps = (state, ownProps) => ({
-    ...ownProps,
-});
-
-const mapDispatchToProps = (dispatch, ownPorps) => ({
-    ...ownPorps,
-    handleCommonAction: bindActionCreators(commonAction, dispatch),
-});
-
-export default connect(mapStateTotProps, mapDispatchToProps)(Common);
+export default Common;

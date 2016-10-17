@@ -11,24 +11,10 @@ class Desired extends Component {
         const { handleCommonAction } = this.props;
 
         return (
-            <DesiredPage
-                handleCommonAction={handleCommonAction}
-            />
+            <DesiredPage handleCommonAction={handleCommonAction} />
         );
     }
 }
 
-Desired.propTypes = {
-    handleCommonAction: PropTypes.func,
-};
 
-const mapStateTotProps = (state, ownProps) => ({
-    ...ownProps,
-});
-
-const mapDispatchToProps = (dispatch, ownPorps) => ({
-    ...ownPorps,
-    handleCommonAction: bindActionCreators(commonAction, dispatch),
-});
-
-export default connect(mapStateTotProps, mapDispatchToProps)(Desired);
+export default Desired;

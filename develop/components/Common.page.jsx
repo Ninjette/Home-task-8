@@ -18,7 +18,6 @@ class CommonPage extends Component {
 
 	componentDidMount(){
 		this.props.loadItems(this.state.limit, this.state.offset, this.state.pokemonsArray);
-		this.checkDesired();
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -34,8 +33,9 @@ class CommonPage extends Component {
 	addDesired(self, pokemon, e){
 		// add pokemon to desired list if there is no such pokemon in Local Storage already
 		let lsLength = localStorage.length;
-		if (true) { //lsLength > 0
-			let similar = false;
+		let similar = false;
+		if (lsLength > 0) {
+			console.log('localStorage not empty');
 			for (var i = 0; i < lsLength; i++) {
 				let key = localStorage.key(i);
 				let keyId = key.slice(5);
@@ -43,19 +43,14 @@ class CommonPage extends Component {
 					similar = true;
 				}
 			};
-			if (!similar) {
-				localStorage.setItem(this.state.elemMask + self.id, JSON.stringify(self));
+		}
 
-				console.log(this, 'this');
-				console.log(self, 'pokemon - first arg');
-				console.log(e.target, 'event.target');
-				e.target.classList.add("active");
-			};
+		if (!similar) {
+			localStorage.setItem(this.state.elemMask + self.id, JSON.stringify(self));
+			e.target.classList.add("active");
 		}
 	}
-	checkDesired(){
-		console.log('checkDesired');
-	}
+
     render() {
         const { handleCommonAction } = this.props;
         
@@ -89,7 +84,6 @@ class CommonPage extends Component {
                     </div>
 
 
-    
                     <div className="loader">
                     	<img  className="loader__media" src="static/build/img/loader.gif"/>
                     	<p className="loader__text">loading...</p>
@@ -116,9 +110,3 @@ CommonPage.propTypes = {
 const Common = connect(mapStateToProps, mapDispatchToProps)(CommonPage);
 
 export default Common;
-
-
-//onClick={this.showDetails.bind(this)}
-//this.showDetails(pokemon.id)
-//onClick={this.showDetails.bind(this, 'mystring')}
-// <i className="icon-heart elem__icon"/>

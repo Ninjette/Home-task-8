@@ -28,17 +28,13 @@ export  function loadItems(limit, offset, pokemons) {
                             pokemons[j].id = resultInfo.id;
                             pokemons[j].types = resultInfo.types;
                             
-                            console.log(pokemons[j], j);
                             counter++;
-                            console.log(counter, 'counter');
                             if (counter === 12) {
-                            	console.log(pokemons);
                                 dispatch(setItems(pokemons));
                                 dispatch(setOffset(pokemons.length));
                                 removeLoader();
                             }
                         })
-                        // .catch(alert);
                 };
             })
             .catch(alert);
