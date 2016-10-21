@@ -35,7 +35,6 @@ class CommonPage extends Component {
 		let lsLength = localStorage.length;
 		let similar = false;
 		if (lsLength > 0) {
-			console.log('localStorage not empty');
 			for (var i = 0; i < lsLength; i++) {
 				let key = localStorage.key(i);
 				let keyId = key.slice(5);
@@ -43,11 +42,22 @@ class CommonPage extends Component {
 					similar = true;
 				}
 			};
-		}
+		};
 
 		if (!similar) {
 			localStorage.setItem(this.state.elemMask + self.id, JSON.stringify(self));
 			e.target.classList.add("active");
+		} else{
+			let message = document.querySelectorAll('.error-message');
+			
+			message.forEach(function(item, i) {
+				message[i].classList.add("active");
+			});
+			setTimeout(function(){
+				message.forEach(function(item, i) {
+					message[i].classList.remove("active");
+				});
+			},4000)
 		}
 	}
 
@@ -57,7 +67,7 @@ class CommonPage extends Component {
         return (
         	<div>
         		<Header />
-                <div className="container">
+                <div className="container clearfix">
                     <div className="row">
                     	{this.state.pokemonsArray.map(function(pokemon, index){
                     		return(
@@ -90,6 +100,7 @@ class CommonPage extends Component {
                     </div>
                     <button onClick={this.loadMore.bind(this)} className="js-load button btn btn-success">Load more</button>
                 </div>
+                <div className="error-message">This pokemon is already in desired list</div>
             </div>
         );
     }

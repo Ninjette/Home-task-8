@@ -11,9 +11,7 @@ class Common extends Component {
         const { handleCommonAction } = this.props;
 
         return (
-            <CommonPage
-                handleCommonAction={handleCommonAction}
-            />
+            <CommonPage handleCommonAction={handleCommonAction} />
         );
     }
 }

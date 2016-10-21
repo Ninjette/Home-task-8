@@ -53,3 +53,22 @@
 .fairy{
 	background-color: #FF5DCF;
 }
+.error-message{
+	transition: transform .25s ease-out;
+	transform: translateY(100%);
+	background-color: #F9E224;
+	min-width: 300px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	max-width: 500px;
+	padding: 10px 15px;
+	border-radius: 3px;
+}
+.error-message.active{
+	transform: translateY(0)
+
+}

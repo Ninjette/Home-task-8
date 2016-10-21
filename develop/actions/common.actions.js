@@ -1,4 +1,5 @@
 import commonTypes from './types/common.types';
+import fetch from 'isomorphic-fetch';
 
 export const commonAction = (params) => ({
     type: commonTypes.COMMON_ACTION,

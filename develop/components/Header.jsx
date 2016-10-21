@@ -11,7 +11,7 @@ class Header extends Component {
 			<div>
 				<div className="header clearfix">
 					<div className="container">
-						<h2 className="header__title">Welcom to pokemon-app</h2>
+						<h2 className="header__title">Welcome to pokemon-app</h2>
 						<div className="header__links">
 							<a className="header__link" href="/#/common">listing</a>
 							<a className="header__link" href="/#/desired">favourites</a>

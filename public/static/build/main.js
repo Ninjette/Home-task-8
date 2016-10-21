@@ -37314,9 +37314,7 @@
 	            var handleCommonAction = this.props.handleCommonAction;
 
 
-	            return _react2.default.createElement(_CommonPage2.default, {
-	                handleCommonAction: handleCommonAction
-	            });
+	            return _react2.default.createElement(_CommonPage2.default, { handleCommonAction: handleCommonAction });
 	        }
 	    }]);
 
